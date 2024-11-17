@@ -1,6 +1,7 @@
 from flask import Flask
 from database import db
 from services.personServices import register_user, get_user, check_user
+import gunicorn
 
 app = Flask(__name__)
 app.config.from_object(f'config.DevelopmentConfig')
@@ -23,5 +24,3 @@ def check():
     return check_user()
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
