@@ -35,7 +35,7 @@ def register_user():
                 session.add(new_person)
                 send_email(new_person.plus_hash, new_person.email)
                 session.commit()
-                return jsonify("message":"person added"),200
+                return jsonify({"message":"person added"}),200
             except:
                 return jsonify({"error":"error"}), 400
             
