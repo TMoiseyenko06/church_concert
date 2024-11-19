@@ -24,16 +24,19 @@ def register_user():
     
     with Session(db.engine) as session:
         with session.begin():
-            email = user_data['email'].encode()
-            new_person = Person(
-                first_name = user_data['first_name'],
-                last_name = user_data['last_name'],
-                email = user_data['email'],
-                plus_hash = hashlib.sha1(email).hexdigest() 
-            )
-            session.add(new_person)
-            send_email(new_person.plus_hash, new_person.email)
-            session.commit()
+            try:
+                email = user_data['email'].encode()
+                new_person = Person(
+                    first_name = user_data['first_name'],
+                    last_name = user_data['last_name'],
+                    email = user_data['email'],
+                    plus_hash = hashlib.sha1(email).hexdigest() 
+                )
+                session.add(new_person)
+                send_email(new_person.plus_hash, new_person.email)
+                session.commit()
+            except:
+                return jsonify({"error":"error"})
             
 
 def get_user(id):
@@ -164,7 +167,14 @@ def send_email(plus_hash, email):
         s.login(sender, password)
         s.sendmail(sender, email, msg.as_string())
         s.close()
-        print("E-Mail has been sent")
+        return jsonify({"message":"Registered and email sent"})
     except:
-        print("Error: Unable to send E-mail.")
+        return jsonify({"error":"email not sent"})
     
+
+def confirm_person():
+    hash = hash_schema.load(request.json)['plus_hash']
+    with Session(db.engine) as session:
+        with session.begin():
+            person = session.execute(select(Person).where(Person.plus_hash == hash))
+            
