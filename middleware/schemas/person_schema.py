@@ -24,3 +24,12 @@ class Hash(ma.Schema):
         fields=("plus_hash","test")
 
 hash_schema = Hash()
+
+class Email(ma.Schema):
+    email = fields.String(required=True)
+    test = fields.String(required=False)
+
+    class Meta():
+        fields=('email','test')
+
+email_schema = Email()

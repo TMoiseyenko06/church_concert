@@ -1,11 +1,11 @@
 from database import db, Base
 from flask import request, jsonify
-from middleware.schemas.person_schema import person_schema, hash_schema
+from middleware.schemas.person_schema import person_schema, hash_schema, email_schema
 from marshmallow import ValidationError
 from sqlalchemy.orm import Session
 from models.person import Person
 import hashlib
-from sqlalchemy import select
+from sqlalchemy import select, exists
 import qrcode
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -180,3 +180,13 @@ def confirm_person():
         with session.begin():
             person = session.execute(select(Person).where(Person.plus_hash == hash))
             
+
+def confirm_email():
+    email = email_schema.load(request.json)['email']
+    with Session(db.engine) as session:
+        with session.begin():
+            email_exists = session.query(exists().where(Person.email == email)).scalar()
+            if email_exists:
+                return jsonify({"error":"email already exists"}), 400
+            else:
+                return jsonify({"message":"OK"}), 200
