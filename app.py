@@ -29,6 +29,6 @@ def check():
     return check_user()
 
 @key_required
-@app.route('/person/check-email',methods=['GET'])
+@app.route('/person/check-email',methods=['POST'])
 def check_email():
     return confirm_email()
