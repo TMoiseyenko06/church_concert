@@ -12,6 +12,10 @@ from email.mime.text import MIMEText
 import io
 from email.mime.image import MIMEImage
 import smtplib
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 
 
@@ -33,7 +37,7 @@ def register_user():
                     plus_hash = hashlib.sha1(email).hexdigest() 
                 )
                 session.add(new_person)
-                send_email(new_person.plus_hash, new_person.email)
+                send_email(new_person.plus_hash, new_person.email,new_person.first_name,new_person.last_name)
                 session.commit()
                 
                 return jsonify({"message":"person added"}),200
@@ -58,7 +62,7 @@ def check_user():
             else:
                  return jsonify({"error":"person_not_exist"})
 
-def send_email(plus_hash, email):
+def send_email(plus_hash, email,first,last):
     code = qrcode.make(plus_hash)
     img_io = io.BytesIO()
     code.save(img_io)
@@ -66,13 +70,13 @@ def send_email(plus_hash, email):
 
     s = smtplib.SMTP('smtp.gmail.com', 587)
     s.starttls()
-    sender = 'radvestmedia@gmail.com'
-    password = 'xiauczrwlwweykxt'
+    sender = 'radvestyouth@gmail.com'
+    password = os.getenv('PASS_EMAIL')
 
     msg = MIMEMultipart()
     msg['From'] = sender
     msg['To'] = email
-    msg['Subject'] = 'Radvest Christmas Concert'
+    msg['Subject'] = f'Concert Ticket for {first}'
 
     msg_content = '''
     <!DOCTYPE html>
