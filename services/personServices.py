@@ -178,8 +178,8 @@ def confirm_person():
     hash = hash_schema.load(request.json)['plus_hash']
     with Session(db.engine) as session:
         with session.begin():
-            person = session.execute(select(Person).where(Person.plus_hash == hash))
-            person.checked_in == True
+            person = session.execute(select(Person).where(Person.plus_hash == hash)).scalars().first()
+            person.check_in()
             session.commit()
 
             return jsonify({"message":"OK"}),200            
