@@ -1,6 +1,6 @@
 from flask import Flask
 from database import db
-from services.personServices import register_user, get_user, check_user, confirm_email
+from services.personServices import register_user, get_user, check_user, confirm_email, confirm_person
 import gunicorn
 from flask_cors import CORS
 from utils.util import key_required
@@ -33,3 +33,7 @@ def check():
 def check_email():
     return confirm_email()
 
+@key_required
+@app.route('/person/confirm',methods=["PUT"])
+def confirm():
+    return confirm_person()

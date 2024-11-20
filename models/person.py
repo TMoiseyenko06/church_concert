@@ -11,3 +11,6 @@ class Person(Base):
     email: Mapped[str] = mapped_column(db.String(255), nullable=False, unique=True)
     plus_hash: Mapped[str] = mapped_column(db.String(255), nullable=False, unique=True)
     checked_in: Mapped[bool] = mapped_column(db.Boolean,nullable=False,default=False)
+
+    def check_in(self):
+        self.check_in = True
