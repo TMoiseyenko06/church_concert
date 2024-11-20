@@ -32,3 +32,4 @@ def check():
 @app.route('/person/check-email',methods=['POST'])
 def check_email():
     return confirm_email()
+
