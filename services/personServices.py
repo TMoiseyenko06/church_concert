@@ -179,7 +179,7 @@ def confirm_person():
     with Session(db.engine) as session:
         with session.begin():
             person = session.execute(select(Person).where(Person.plus_hash == hash)).scalars().first()
-            person.check_in()
+            person.checked_in == True
             session.commit()
 
             return jsonify({"message":"OK"}),200            
