@@ -29,7 +29,8 @@ def register_user():
     with Session(db.engine) as session:
         with session.begin():
             try:
-                if session.query(exists().where(Person.email == user_data['email'])):
+                email_exists = session.query(exists().where(Person.email == user_data['email'])).scalar()
+                if email_exists:
                     return jsonify({"error":"error"}), 400
                 
                 email = user_data['email'].encode()
