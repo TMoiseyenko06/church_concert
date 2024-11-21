@@ -29,6 +29,9 @@ def register_user():
     with Session(db.engine) as session:
         with session.begin():
             try:
+                if session.query(exists().where(Person.email == user_data['email'])):
+                    return jsonify({"error":"error"}), 400
+                
                 email = user_data['email'].encode()
                 new_person = Person(
                     first_name = user_data['first_name'],
@@ -39,7 +42,6 @@ def register_user():
                 session.add(new_person)
                 send_email(new_person.plus_hash, new_person.email,new_person.first_name,new_person.last_name)
                 session.commit()
-                
                 return jsonify({"message":"person added"}),200
             except:
                 return jsonify({"error":"error"}), 400

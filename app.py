@@ -37,3 +37,4 @@ def check_email():
 @app.route('/person/confirm',methods=["PUT"])
 def confirm():
     return confirm_person()
+
