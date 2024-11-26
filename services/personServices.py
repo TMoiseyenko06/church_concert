@@ -112,7 +112,9 @@ def send_email(plus_hash, email,first,last):
                 text-align: center;
                 color: #ffffff;
             }
-
+            a:link, a:visited {
+                color: #b0151e;
+            }
             h1 {
                 font-family: 'Brush Script MT', cursive;
                 color: #fff;
