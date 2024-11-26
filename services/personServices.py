@@ -149,7 +149,7 @@ def send_email(plus_hash, email,first,last):
                                     </div>
                                     <p><strong>Event:</strong> Radvest Youth Christmas Concert</p>
                                     <p><strong>Date:</strong> December 21, 2024</p>
-                                    <p><strong>Location:</strong><a href="https://www.bing.com/maps?osid=5a360056-1854-4197-a6aa-a53c189eb2bd&cp=40.145133~-75.004435&lvl=17&pi=0&imgid=4e8218a1-52ad-4ca3-820b-384d4ff09deb&v=2&sV=2&form=S00027">Church of Wonderful News</a></p>
+                                    <p><strong>Location:</strong><a href="https://maps.app.goo.gl/3tqFyzfBB1JsK87U8">Church of Wonderful News</a></p>
                                     <p style="font-size: 12px;">If you have any questions, please contact our support team.</p>
                                     <p style="font-size: 12px;">© 2024 Radvest Youth. All rights reserved.</p>
                                 </div>
