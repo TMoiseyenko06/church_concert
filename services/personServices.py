@@ -149,7 +149,7 @@ def send_email(plus_hash, email,first,last):
                                     </div>
                                     <p><strong>Event:</strong> Radvest Youth Christmas Concert</p>
                                     <p><strong>Date:</strong> December 21, 2024</p>
-                                    <p><strong>Location:</strong> Church of Wonderful News</p>
+                                    <p><strong>Location:</strong> Church of Wonderful News (514 Highland Ave, Feasterville Trevose, PA 19053)</p>
                                     <p style="font-size: 12px;">If you have any questions, please contact our support team.</p>
                                     <p style="font-size: 12px;">© 2024 Radvest Youth. All rights reserved.</p>
                                 </div>
