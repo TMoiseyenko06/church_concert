@@ -39,6 +39,6 @@ def confirm():
     return confirm_person()
 
 @key_required
-@app.route('/person/get_all',methods='GET')
+@app.route('/person/get_all',methods=['GET'])
 def get_all_users():
     return get_all()
