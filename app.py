@@ -24,7 +24,7 @@ def get_person(id):
     return get_user(id)
 
 @key_required
-@app.route('/person/check', methods=['GET'])
+@app.route('/person/check', methods=['POST'])
 def check():
     return check_user()
 
