@@ -1,6 +1,6 @@
 from database import db, Base
 from flask import request, jsonify
-from middleware.schemas.person_schema import person_schema, hash_schema, email_schema
+from middleware.schemas.person_schema import person_schema, hash_schema, email_schema, persons_schema
 from marshmallow import ValidationError
 from sqlalchemy.orm import Session
 from models.person import Person
@@ -212,4 +212,4 @@ def get_all():
     with Session(db.engine) as session:
         with session.begin():
             people = session.execute(select(Person)).scalars().all()
-            return person_schema.jsonify(people)
+            return persons_schema.jsonify(people)
