@@ -73,8 +73,9 @@ def send_email(plus_hash, email,first,last):
 
     s = smtplib.SMTP('smtp.gmail.com', 587)
     s.starttls()
-    sender = 'radvestyouth@gmail.com'
     password = os.getenv('PASS_EMAIL')
+    sender = os.getenv('SEND_EMAIL')
+    
 
     msg = MIMEMultipart()
     msg['From'] = sender
@@ -206,3 +207,9 @@ def confirm_email():
                 return jsonify({"error":"email already exists"}), 400
             else:
                 return jsonify({"message":"OK"}), 200
+            
+def get_all():
+    with Session(db.engine) as session:
+        with session.begin():
+            people = session.execute(select(Person)).scalars().all()
+            return person_schema.jsonify(people)
