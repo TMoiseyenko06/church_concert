@@ -74,7 +74,7 @@ def send_email(plus_hash, email,first,last):
     s = smtplib.SMTP('smtp.gmail.com', 587)
     s.starttls()
     password = os.getenv('PASS_EMAIL')
-    sender = os.getenv('SEND_EMAIL')
+    sender = 'radvestyouth@gmail.com'
     
 
     msg = MIMEMultipart()
