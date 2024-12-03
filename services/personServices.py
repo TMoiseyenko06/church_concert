@@ -213,3 +213,13 @@ def get_all():
         with session.begin():
             people = session.execute(select(Person)).scalars().all()
             return persons_schema.jsonify(people)
+
+def remove_user(id):
+    with Session(db.engine) as session:
+        with session.begin():
+            try:
+                person = session.get(Person,id)
+                session.delete(person)
+                return jsonify({"deleted":f"user {id}"})
+            except:
+                return jsonify({"error":"user not found"})
