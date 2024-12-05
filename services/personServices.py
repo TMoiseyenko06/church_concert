@@ -223,3 +223,12 @@ def remove_user(id):
                 return jsonify({"deleted":f"user {id}"})
             except:
                 return jsonify({"error":"user not found"})
+            
+def get_checked_in():
+    with Session(db.engine) as session:
+        with session.begin():
+            try:
+                checked_in = session.execute(select(Person).where(Person.checked_in == True))
+                return persons_schema.jsonify(checked_in)
+            except:
+                pass

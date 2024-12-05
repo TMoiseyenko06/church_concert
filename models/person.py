@@ -13,4 +13,6 @@ class Person(Base):
     checked_in: Mapped[bool] = mapped_column(db.Boolean,nullable=False,default=False)
 
     def check_in(self):
-        self.check_in = True
+        self.checked_in = True
+
+    
