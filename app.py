@@ -1,6 +1,6 @@
 from flask import Flask
 from database import db
-from services.personServices import register_user, get_user, check_user, confirm_email, confirm_person, get_all, remove_user
+from services.personServices import register_user, get_user, check_user, confirm_email, confirm_person, get_all, remove_user, get_checked_in
 import gunicorn
 from flask_cors import CORS
 from utils.util import key_required
@@ -47,3 +47,8 @@ def get_all_users():
 @app.route('/person/remove/<int:id>',methods=['DELETE'])
 def remove_user_id(id):
     return remove_user(id)
+
+@key_required
+@app.route('/person/get_checked_in',methods=['GET'])
+def get_checked():
+    return get_checked_in()
